@@ -1,43 +1,33 @@
 import { useEffect, useState } from 'react';
+import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom';
 import { fetchHealth } from './services/api';
+import AppLayout from './components/layout/AppLayout';
+import Overview from './pages/Overview';
+import Customers from './pages/Customers';
+import Transactions from './pages/Transactions';
+import Reports from './pages/Reports';
+import Settings from './pages/Settings';
 import './App.css';
 
 const STATUS_LOADING = 'loading';
 const STATUS_CONNECTED = 'connected';
 const STATUS_ERROR = 'error';
 
-function statusLabel(status) {
-  switch (status) {
-    case STATUS_LOADING:
-      return 'Connecting to API...';
-    case STATUS_CONNECTED:
-      return 'Connected';
-    case STATUS_ERROR:
-      return 'Connection error';
-    default:
-      return 'Initializing';
-  }
-}
-
-function App() {
+export default function App() {
   const [status, setStatus] = useState(STATUS_LOADING);
-  const [health, setHealth] = useState(null);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     let mounted = true;
 
     fetchHealth()
-      .then((data) => {
+      .then(() => {
         if (mounted) {
           setStatus(STATUS_CONNECTED);
-          setHealth(data);
         }
       })
-      .catch((err) => {
+      .catch(() => {
         if (mounted) {
           setStatus(STATUS_ERROR);
-          setError(err.message);
         }
       });
 
@@ -47,35 +37,17 @@ function App() {
   }, []);
 
   return (
-    <main className="app">
-      <header className="header">
-        <div className="container">
-          <h1>DeniTrack</h1>
-          <p className="tagline">A smarter way to manage your business credit.</p>
-        </div>
-      </header>
-
-      <section className="status-section">
-        <div className="container">
-          <h2>API Connection</h2>
-          <div className={`status-indicator status-${status}`} role="status" aria-live="polite">
-            <span className="status-dot" aria-hidden="true"></span>
-            <span className="status-text">{statusLabel(status)}</span>
-          </div>
-
-          {status === STATUS_CONNECTED && health && (
-            <pre className="health-json" aria-label="API health response">
-              {JSON.stringify(health, null, 2)}
-            </pre>
-          )}
-
-          {status === STATUS_ERROR && error && (
-            <p className="error-text">{error}</p>
-          )}
-        </div>
-      </section>
-    </main>
+    <BrowserRouter>
+      <AppLayout status={status}>
+        <Routes>
+          <Route path="/" element={<Navigate to="/overview" replace />} />
+          <Route path="/overview" element={<Overview />} />
+          <Route path="/customers" element={<Customers />} />
+          <Route path="/transactions" element={<Transactions />} />
+          <Route path="/reports" element={<Reports />} />
+          <Route path="/settings" element={<Settings />} />
+        </Routes>
+      </AppLayout>
+    </BrowserRouter>
   );
 }
-
-export default App;
