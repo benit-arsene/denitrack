@@ -1,15 +1,9 @@
 import { useLocation } from 'react-router-dom';
 import { PAGE_TITLES } from './navItems';
 
-export default function Topbar({ status }) {
+export default function Topbar() {
   const { pathname } = useLocation();
   const title = PAGE_TITLES[pathname] || 'DeniTrack';
-
-  const statusDot = {
-    loading: { color: '#A3A3A3', label: 'Connecting' },
-    connected: { color: '#4ADE80', label: 'API connected' },
-    error: { color: '#F87171', label: 'API error' },
-  }[status] || { color: '#A3A3A3', label: 'Initializing' };
 
   return (
     <header className="topbar" role="banner">
@@ -21,10 +15,6 @@ export default function Topbar({ status }) {
           <span className="visually-hidden">DeniTrack navigation</span>
         </div>
         <div className="topbar-end">
-          <div className="health-pill" role="status" aria-live="polite">
-            <span className="health-dot" style={{ backgroundColor: statusDot.color }} aria-hidden="true"></span>
-            <span className="health-label">{statusDot.label}</span>
-          </div>
           <button className="topbar-icon-btn" aria-label="Notifications" title="Notifications" aria-haspopup="true">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>

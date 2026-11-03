@@ -155,25 +155,6 @@
   margin: 0 var(--dt-space-8);
 }
 
-.health-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--dt-space-2);
-  padding: var(--dt-space-2) var(--dt-space-3);
-  border: 1px solid var(--dt-border);
-  border-radius: var(--dt-radius-full);
-  background: var(--dt-surface);
-  font-size: var(--dt-font-size-xs);
-  font-weight: var(--dt-font-weight-medium);
-  color: var(--dt-text-secondary);
-}
-
-.health-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-}
-
 .topbar-icon-btn {
   display: flex;
   align-items: center;

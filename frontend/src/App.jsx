@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom';
 import { fetchHealth } from './services/api';
 import AppLayout from './components/layout/AppLayout';
@@ -9,25 +9,19 @@ import Reports from './pages/Reports';
 import Settings from './pages/Settings';
 import './App.css';
 
-const STATUS_LOADING = 'loading';
-const STATUS_CONNECTED = 'connected';
-const STATUS_ERROR = 'error';
-
 export default function App() {
-  const [status, setStatus] = useState(STATUS_LOADING);
-
   useEffect(() => {
     let mounted = true;
 
     fetchHealth()
       .then(() => {
         if (mounted) {
-          setStatus(STATUS_CONNECTED);
+          // Health check performed; indicator intentionally not displayed.
         }
       })
       .catch(() => {
         if (mounted) {
-          setStatus(STATUS_ERROR);
+          // Health check performed; indicator intentionally not displayed.
         }
       });
 
@@ -38,7 +32,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <AppLayout status={status}>
+      <AppLayout>
         <Routes>
           <Route path="/" element={<Navigate to="/overview" replace />} />
           <Route path="/overview" element={<Overview />} />
