@@ -30,7 +30,7 @@
   --dt-space-16: 64px;
 
   /* Typography */
-  --dt-font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  --dt-font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
   --dt-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
   --dt-font-size-xs: 0.75rem;
   --dt-font-size-sm: 0.875rem;
