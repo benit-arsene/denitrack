@@ -1,0 +1,41 @@
+/* Badge component styles */
+.dt-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--dt-space-1) var(--dt-space-3);
+  font-size: var(--dt-font-size-xs);
+  font-weight: var(--dt-font-weight-medium);
+  border-radius: var(--dt-radius-full);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.dt-badge--neutral {
+  background: var(--dt-bg-secondary);
+  color: var(--dt-text-secondary);
+  border: 1px solid var(--dt-border);
+}
+
+.dt-badge--success {
+  background: rgba(74, 222, 128, 0.12);
+  color: var(--dt-success);
+  border: 1px solid rgba(74, 222, 128, 0.25);
+}
+
+.dt-badge--warning {
+  background: rgba(250, 204, 21, 0.12);
+  color: #facc15;
+  border: 1px solid rgba(250, 204, 21, 0.25);
+}
+
+.dt-badge--danger {
+  background: rgba(248, 113, 113, 0.12);
+  color: var(--dt-danger);
+  border: 1px solid rgba(248, 113, 113, 0.25);
+}
+
+.dt-badge--info {
+  background: rgba(96, 165, 250, 0.12);
+  color: #60a5fa;
+  border: 1px solid rgba(96, 165, 250, 0.25);
+}

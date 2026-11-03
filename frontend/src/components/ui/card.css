@@ -1,0 +1,34 @@
+/* Card component styles */
+.dt-card {
+  background: var(--dt-surface);
+  border: 1px solid var(--dt-border);
+  border-radius: var(--dt-radius-lg);
+  display: flex;
+  flex-direction: column;
+}
+
+.dt-card--padded {
+  padding: var(--dt-space-6);
+}
+
+.dt-card--elevated {
+  background: var(--dt-elevated);
+  box-shadow: var(--dt-shadow-sm);
+}
+
+.dt-card-body {
+  flex: 1;
+}
+
+.dt-card-title {
+  margin: 0 0 var(--dt-space-2);
+  font-size: var(--dt-font-size-lg);
+  font-weight: var(--dt-font-weight-semibold);
+  color: var(--dt-text);
+}
+
+.dt-card-description {
+  margin: 0 0 var(--dt-space-4);
+  font-size: var(--dt-font-size-sm);
+  color: var(--dt-text-secondary);
+}

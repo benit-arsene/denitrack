@@ -1,0 +1,88 @@
+/* Button component styles */
+.dt-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--dt-space-2);
+  padding: var(--dt-space-3) var(--dt-space-6);
+  font-family: inherit;
+  font-size: var(--dt-font-size-sm);
+  font-weight: var(--dt-font-weight-medium);
+  line-height: 1;
+  color: var(--dt-text);
+  background: var(--dt-primary);
+  border: 1px solid transparent;
+  border-radius: var(--dt-radius);
+  cursor: pointer;
+  transition: background var(--dt-transition-fast), border-color var(--dt-transition-fast), opacity var(--dt-transition-fast);
+  text-decoration: none;
+  min-height: 40px;
+}
+
+.dt-button:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.dt-button:focus-visible {
+  outline: 2px solid var(--dt-focus);
+  outline-offset: 2px;
+}
+
+.dt-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.dt-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dt-button--secondary {
+  background: var(--dt-bg-secondary);
+  border-color: var(--dt-border);
+}
+
+.dt-button--outline {
+  background: transparent;
+  border-color: var(--dt-border);
+}
+
+.dt-button--danger {
+  background: var(--dt-danger);
+  border-color: transparent;
+}
+
+.dt-button--danger:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.dt-button--sm {
+  padding: var(--dt-space-2) var(--dt-space-4);
+  font-size: var(--dt-font-size-xs);
+  min-height: 32px;
+}
+
+.dt-button--lg {
+  padding: var(--dt-space-4) var(--dt-space-8);
+  font-size: var(--dt-font-size-base);
+  min-height: 48px;
+}
+
+.dt-button .dt-button-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: dt-spin 0.8s linear infinite;
+}
+
+@keyframes dt-spin {
+  to { transform: rotate(360deg); }
+}
+
+.dt-button-leading,
+.dt-button-trailing {
+  display: flex;
+  align-items: center;
+}

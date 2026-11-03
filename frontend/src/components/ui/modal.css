@@ -1,0 +1,105 @@
+/* Modal component styles */
+.dt-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--dt-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--dt-space-6);
+  animation: dt-fade-in var(--dt-transition-fast);
+}
+
+@keyframes dt-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.dt-modal {
+  width: 100%;
+  max-width: 520px;
+  background: var(--dt-bg-secondary);
+  border: 1px solid var(--dt-border);
+  border-radius: var(--dt-radius-lg);
+  box-shadow: var(--dt-shadow-lg);
+  display: flex;
+  flex-direction: column;
+  animation: dt-slide-up var(--dt-transition-fast);
+  overflow: hidden;
+}
+
+@keyframes dt-slide-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dt-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--dt-space-6);
+  border-bottom: 1px solid var(--dt-border);
+}
+
+.dt-modal-title {
+  margin: 0;
+  font-size: var(--dt-font-size-xl);
+  font-weight: var(--dt-font-weight-semibold);
+  color: var(--dt-text);
+}
+
+.dt-modal-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--dt-radius);
+  background: transparent;
+  color: var(--dt-text-muted);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background var(--dt-transition-fast), color var(--dt-transition-fast);
+}
+
+.dt-modal-close:hover {
+  background: var(--dt-hover);
+  color: var(--dt-text);
+}
+
+.dt-modal-close:focus-visible {
+  outline: 2px solid var(--dt-focus);
+  outline-offset: 2px;
+}
+
+.dt-modal-body {
+  padding: var(--dt-space-6);
+  overflow: auto;
+  max-height: 70vh;
+}
+
+.dt-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--dt-space-3);
+  padding: var(--dt-space-6);
+  border-top: 1px solid var(--dt-border);
+  background: var(--dt-bg-secondary);
+}
+
+.dt-modal-scroll {
+  overflow-y: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dt-modal-overlay,
+  .dt-modal {
+    animation: none;
+  }
+}
+
+.dt-modal-scroll-lock {
+  overflow: hidden;
+}
