@@ -1,73 +1,35 @@
-:root {
-  --bg: #ffffff;
-  --surface: #f4f6f9;
-  --text: #0f172a;
-  --text-muted: #64748b;
-  --border: #e2e8f0;
-  --primary: #0f172a;
-  --accent: #0ea5e9;
-  --success: #16a34a;
-  --error: #dc2626;
-  --radius: 14px;
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-  --font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: var(--font);
-  color: var(--text);
-  background: var(--bg);
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-}
-
-#root {
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-}
-
 .app {
   display: flex;
   flex-direction: column;
   min-height: 100svh;
+  background: var(--dt-bg);
 }
 
 .container {
   width: 100%;
   max-width: 720px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 var(--dt-space-6);
 }
 
 .header {
-  padding: 64px 24px 24px;
+  padding: var(--dt-space-16) var(--dt-space-6) var(--dt-space-6);
   text-align: center;
 }
 
 .header h1 {
-  margin: 0 0 12px;
+  margin: 0 0 var(--dt-space-4);
   font-size: 44px;
-  font-weight: 800;
+  font-weight: var(--dt-font-weight-bold);
   letter-spacing: -0.6px;
-  color: var(--primary);
+  color: var(--dt-text);
 }
 
 .tagline {
-  margin: 0;
+  margin: 0 auto var(--dt-space-10);
   font-size: 18px;
-  color: var(--text-muted);
+  color: var(--dt-text-secondary);
   max-width: 560px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .status-section {
@@ -76,63 +38,61 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 40px 24px;
+  padding: var(--dt-space-10) var(--dt-space-6);
   text-align: center;
 }
 
 .status-section h2 {
-  margin: 0 0 20px;
-  font-size: 22px;
-  font-weight: 600;
+  margin: 0 0 var(--dt-space-5);
+  font-size: var(--dt-font-size-xl);
+  font-weight: var(--dt-font-weight-semibold);
+  color: var(--dt-text);
 }
 
 .status-indicator {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 22px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: var(--surface);
-  font-size: 15px;
-  font-weight: 500;
+  gap: var(--dt-space-3);
+  padding: var(--dt-space-3) var(--dt-space-5);
+  border: 1px solid var(--dt-border);
+  border-radius: var(--dt-radius-full);
+  background: var(--dt-surface);
+  font-size: var(--dt-font-size-sm);
+  font-weight: var(--dt-font-weight-medium);
+  color: var(--dt-text);
 }
 
 .status-dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--text-muted);
+  background: var(--dt-text-muted);
 }
 
 .status-loading .status-dot {
   animation: pulse 1.6s ease-in-out infinite;
-  background: var(--text-muted);
+  background: var(--dt-text-muted);
 }
 
 .status-connected .status-dot {
-  background: var(--success);
-  box-shadow: 0 0 0 6px rgba(22, 163, 74, 0.18);
+  background: var(--dt-success);
+  box-shadow: 0 0 0 6px rgba(74, 222, 128, 0.18);
 }
 
 .status-error .status-dot {
-  background: var(--error);
-  box-shadow: 0 0 0 6px rgba(220, 38, 38, 0.18);
-}
-
-.status-text {
-  color: var(--text);
+  background: var(--dt-danger);
+  box-shadow: 0 0 0 6px rgba(248, 113, 113, 0.18);
 }
 
 .health-json {
-  margin-top: 24px;
-  padding: 18px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--surface);
-  font-family: var(--mono);
-  font-size: 13px;
-  color: var(--text-muted);
+  margin-top: var(--dt-space-6);
+  padding: var(--dt-space-5);
+  border: 1px solid var(--dt-border);
+  border-radius: var(--dt-radius-md);
+  background: var(--dt-surface);
+  font-family: var(--dt-font-mono);
+  font-size: var(--dt-font-size-xs);
+  color: var(--dt-text-muted);
   overflow: auto;
   max-width: 460px;
   text-align: left;
@@ -141,9 +101,9 @@ body {
 }
 
 .error-text {
-  margin-top: 14px;
-  font-size: 14px;
-  color: var(--error);
+  margin-top: var(--dt-space-4);
+  font-size: var(--dt-font-size-sm);
+  color: var(--dt-danger);
 }
 
 @keyframes pulse {
@@ -158,7 +118,7 @@ body {
 
 @media (max-width: 640px) {
   .header {
-    padding: 48px 16px 20px;
+    padding: var(--dt-space-12) var(--dt-space-4) var(--dt-space-4);
   }
 
   .header h1 {
@@ -170,10 +130,10 @@ body {
   }
 
   .status-section {
-    padding: 32px 16px;
+    padding: var(--dt-space-8) var(--dt-space-4);
   }
 
   .status-section h2 {
-    font-size: 18px;
+    font-size: var(--dt-font-size-lg);
   }
 }

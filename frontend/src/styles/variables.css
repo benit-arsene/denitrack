@@ -1,0 +1,68 @@
+:root {
+  /* Colors — pure black theme */
+  --dt-bg: #000000;
+  --dt-bg-secondary: #080808;
+  --dt-surface: #111111;
+  --dt-elevated: #181818;
+  --dt-primary: #172D54;
+  --dt-accent: #FFFFFF;
+  --dt-success: #4ADE80;
+  --dt-danger: #F87171;
+  --dt-text: #FFFFFF;
+  --dt-text-secondary: #A3A3A3;
+  --dt-text-muted: #737373;
+  --dt-border: #292929;
+  --dt-border-hover: #404040;
+  --dt-hover: rgba(255, 255, 255, 0.04);
+  --dt-focus: rgba(255, 255, 255, 0.4);
+  --dt-overlay: rgba(0, 0, 0, 0.6);
+
+  /* Spacing */
+  --dt-space-1: 4px;
+  --dt-space-2: 8px;
+  --dt-space-3: 12px;
+  --dt-space-4: 16px;
+  --dt-space-5: 20px;
+  --dt-space-6: 24px;
+  --dt-space-8: 32px;
+  --dt-space-10: 40px;
+  --dt-space-12: 48px;
+  --dt-space-16: 64px;
+
+  /* Typography */
+  --dt-font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  --dt-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+  --dt-font-size-xs: 0.75rem;
+  --dt-font-size-sm: 0.875rem;
+  --dt-font-size-base: 1rem;
+  --dt-font-size-lg: 1.125rem;
+  --dt-font-size-xl: 1.25rem;
+  --dt-font-size-2xl: 1.5rem;
+  --dt-font-size-3xl: 1.875rem;
+  --dt-font-size-4xl: 2.25rem;
+  --dt-font-size-5xl: 3rem;
+  --dt-line-height-tight: 1.25;
+  --dt-line-height-normal: 1.5;
+  --dt-line-height-relaxed: 1.75;
+  --dt-font-weight-normal: 400;
+  --dt-font-weight-medium: 500;
+  --dt-font-weight-semibold: 600;
+  --dt-font-weight-bold: 700;
+
+  /* Radius */
+  --dt-radius-sm: 6px;
+  --dt-radius: 10px;
+  --dt-radius-md: 12px;
+  --dt-radius-lg: 16px;
+  --dt-radius-full: 9999px;
+
+  /* Shadows */
+  --dt-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  --dt-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --dt-shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.35);
+  --dt-shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.35);
+
+  /* Transitions */
+  --dt-transition-fast: 150ms ease;
+  --dt-transition: 200ms ease;
+}
