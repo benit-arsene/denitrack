@@ -4,6 +4,7 @@ import { fetchHealth } from './services/api';
 import AppLayout from './components/layout/AppLayout';
 import Overview from './pages/Overview';
 import Customers from './pages/Customers';
+import CustomerDetail from './pages/CustomerDetail';
 import Transactions from './pages/Transactions';
 import Reports from './pages/Reports';
 import Settings from './pages/Settings';
@@ -37,6 +38,7 @@ export default function App() {
           <Route path="/" element={<Navigate to="/overview" replace />} />
           <Route path="/overview" element={<Overview />} />
           <Route path="/customers" element={<Customers />} />
+          <Route path="/customers/:id" element={<CustomerDetail />} />
           <Route path="/transactions" element={<Transactions />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/settings" element={<Settings />} />

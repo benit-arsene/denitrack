@@ -1,0 +1,430 @@
+/* ===== Customer management page styles ===== */
+
+.dt-customers-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dt-space-6);
+}
+
+.dt-page-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dt-space-4);
+  border-bottom: 1px solid var(--dt-border);
+  padding-bottom: var(--dt-space-4);
+  margin-bottom: var(--dt-space-6);
+}
+
+.dt-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--dt-space-4);
+  flex-wrap: wrap;
+}
+
+.dt-page-header h2 {
+  margin: 0;
+  font-size: var(--dt-font-size-2xl);
+  font-weight: var(--dt-font-weight-bold);
+  color: var(--dt-text);
+}
+
+/* Customer list */
+.dt-customer-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dt-space-4);
+}
+
+.dt-list-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dt-space-3);
+}
+
+.dt-search-input {
+  max-width: 420px;
+  width: 100%;
+}
+
+.dt-list-results {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dt-space-3);
+}
+
+.dt-results-count {
+  margin: 0;
+  font-size: var(--dt-font-size-sm);
+  color: var(--dt-text-secondary);
+}
+
+.dt-customer-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dt-space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dt-empty-result {
+  padding: var(--dt-space-8);
+  text-align: center;
+  color: var(--dt-text-muted);
+}
+
+/* Customer row */
+.dt-customer-row {
+  display: flex;
+  align-items: center;
+  gap: var(--dt-space-4);
+  padding: var(--dt-space-5);
+  background: var(--dt-surface);
+  border: 1px solid var(--dt-border);
+  border-radius: var(--dt-radius-lg);
+  cursor: pointer;
+  transition: background var(--dt-transition-fast), border-color var(--dt-transition-fast);
+  min-height: 72px;
+}
+
+.dt-customer-row:hover {
+  background: var(--dt-bg-secondary);
+  border-color: var(--dt-border-hover);
+}
+
+.dt-customer-row:focus-visible {
+  outline: 2px solid var(--dt-focus);
+  outline-offset: 2px;
+}
+
+.dt-customer-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--dt-radius-full);
+  background: var(--dt-primary);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--dt-font-weight-bold);
+  font-size: var(--dt-font-size-sm);
+  flex-shrink: 0;
+}
+
+.dt-customer-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.dt-customer-name {
+  margin: 0 0 var(--dt-space-1);
+  font-size: var(--dt-font-size-base);
+  font-weight: var(--dt-font-weight-semibold);
+  color: var(--dt-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dt-customer-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--dt-space-2);
+  font-size: var(--dt-font-size-xs);
+  color: var(--dt-text-muted);
+}
+
+.dt-customer-divider {
+  color: var(--dt-text-muted);
+}
+
+.dt-customer-status {
+  flex-shrink: 0;
+}
+
+.dt-customer-status-badge {
+  white-space: nowrap;
+}
+
+.dt-customer-balance {
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.dt-balance-label {
+  display: block;
+  font-size: var(--dt-font-size-xs);
+  color: var(--dt-text-muted);
+}
+
+.dt-balance-amount {
+  font-size: var(--dt-font-size-base);
+  font-weight: var(--dt-font-weight-semibold);
+  color: var(--dt-text);
+}
+
+.dt-customer-select {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--dt-radius);
+  background: transparent;
+  color: var(--dt-text-secondary);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background var(--dt-transition-fast), color var(--dt-transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dt-customer-select:hover {
+  background: var(--dt-hover);
+  color: var(--dt-text);
+}
+
+/* Add customer form */
+.dt-add-customer-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dt-space-4);
+}
+
+.dt-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--dt-space-3);
+  padding: var(--dt-space-6);
+  border-top: 1px solid var(--dt-border);
+  background: var(--dt-bg-secondary);
+}
+
+/* Customer detail */
+.dt-customer-detail-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dt-space-6);
+}
+
+.dt-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--dt-space-2);
+  color: var(--dt-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-size: var(--dt-font-size-sm);
+  margin-bottom: var(--dt-space-2);
+}
+
+.dt-back-link:hover {
+  opacity: 0.9;
+}
+
+.dt-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: var(--dt-space-6);
+  align-items: start;
+}
+
+.dt-detail-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dt-space-4);
+}
+
+.dt-detail-card {
+  background: var(--dt-surface);
+  border: 1px solid var(--dt-border);
+  border-radius: var(--dt-radius-lg);
+  padding: var(--dt-space-6);
+}
+
+.dt-detail-field {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--dt-space-4);
+  padding: var(--dt-space-3) 0;
+  border-bottom: 1px solid var(--dt-border);
+}
+
+.dt-detail-field:last-child {
+  border-bottom: none;
+}
+
+.dt-detail-label {
+  font-size: var(--dt-font-size-sm);
+  color: var(--dt-text-muted);
+  white-space: nowrap;
+}
+
+.dt-detail-value {
+  font-size: var(--dt-font-size-sm);
+  color: var(--dt-text);
+  font-weight: var(--dt-font-weight-medium);
+  text-align: right;
+}
+
+.dt-detail-summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dt-space-4);
+}
+
+.dt-summary-card {
+  background: var(--dt-surface);
+  border: 1px solid var(--dt-border);
+  border-radius: var(--dt-radius-lg);
+  padding: var(--dt-space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--dt-space-3);
+}
+
+.dt-summary-label {
+  font-size: var(--dt-font-size-xs);
+  font-weight: var(--dt-font-weight-medium);
+  color: var(--dt-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.dt-summary-amount {
+  font-size: var(--dt-font-size-3xl);
+  font-weight: var(--dt-font-weight-bold);
+  color: var(--dt-text);
+  letter-spacing: -0.02em;
+}
+
+.dt-status-badge {
+  width: fit-content;
+}
+
+/* Transactions section */
+.dt-transactions-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dt-space-4);
+}
+
+.dt-section-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dt-space-2);
+  margin-bottom: var(--dt-space-2);
+}
+
+.dt-section-title {
+  margin: 0;
+  font-size: var(--dt-font-size-lg);
+  font-weight: var(--dt-font-weight-semibold);
+  color: var(--dt-text);
+}
+
+.dt-section-subtitle {
+  margin: 0;
+  font-size: var(--dt-font-size-sm);
+  color: var(--dt-text-secondary);
+}
+
+.dt-transactions-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--dt-font-size-sm);
+}
+
+.dt-transactions-table th {
+  text-align: left;
+  padding: var(--dt-space-3) var(--dt-space-4);
+  font-weight: var(--dt-font-weight-medium);
+  color: var(--dt-text-secondary);
+  border-bottom: 1px solid var(--dt-border);
+  font-size: var(--dt-font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.dt-transactions-table td {
+  padding: var(--dt-space-3) var(--dt-space-4);
+  border-bottom: 1px solid var(--dt-border);
+  color: var(--dt-text);
+}
+
+.dt-transactions-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.dt-transaction-row:hover {
+  background: var(--dt-hover);
+}
+
+.dt-align-right {
+  text-align: right;
+}
+
+.dt-tx-date {
+  color: var(--dt-text-muted);
+}
+
+.dt-tx-amount {
+  font-weight: var(--dt-font-weight-medium);
+  color: var(--dt-text);
+}
+
+.dt-empty-transactions {
+  padding: var(--dt-space-8);
+  text-align: center;
+  color: var(--dt-text-muted);
+}
+
+/* Responsive */
+@media (max-width: 899px) {
+  .dt-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dt-header-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dt-search-input {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .dt-customer-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--dt-space-3);
+    padding: var(--dt-space-4);
+  }
+
+  .dt-customer-balance {
+    text-align: left;
+    align-self: flex-end;
+  }
+
+  .dt-customer-select {
+    align-self: flex-start;
+    margin-top: var(--dt-space-2);
+  }
+
+  .dt-balance-amount {
+    white-space: nowrap;
+  }
+
+  .dt-transactions-table {
+    font-size: var(--dt-font-size-xs);
+  }
+
+  .dt-transactions-table th,
+  .dt-transactions-table td {
+    padding: var(--dt-space-2) var(--dt-space-3);
+  }
+}
