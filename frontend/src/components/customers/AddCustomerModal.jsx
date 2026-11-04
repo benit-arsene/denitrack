@@ -4,10 +4,12 @@ import Input from '../ui/Input';
 import Modal from '../ui/Modal';
 
 const PHONE_REGEX = /^\+?[0-9\s]{8,}$/;
+const NON_NEGATIVE_NUMBER_REGEX = /^\d*\.?\d*$/;
 
 export default function AddCustomerModal({ isOpen, onClose, onAdd }) {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
+  const [creditLimit, setCreditLimit] = useState('');
   const [notes, setNotes] = useState('');
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
@@ -17,6 +19,13 @@ export default function AddCustomerModal({ isOpen, onClose, onAdd }) {
     if (!name.trim()) next.name = 'Full name is required';
     if (!phone.trim()) next.phone = 'Phone number is required';
     else if (!PHONE_REGEX.test(phone)) next.phone = 'Enter a valid phone number';
+    if (creditLimit.trim() !== '') {
+      if (!NON_NEGATIVE_NUMBER_REGEX.test(creditLimit)) {
+        next.creditLimit = 'Enter a valid number';
+      } else if (parseFloat(creditLimit) < 0) {
+        next.creditLimit = 'Credit limit must be non-negative';
+      }
+    }
     setErrors(next);
     return Object.keys(next).length === 0;
   };
@@ -29,21 +38,18 @@ export default function AddCustomerModal({ isOpen, onClose, onAdd }) {
       id: `cust-${Date.now()}`,
       name: name.trim(),
       phone: phone.trim(),
+      creditLimit: creditLimit.trim() ? parseFloat(creditLimit) : 0,
       notes: notes.trim(),
-      outstandingBalance: 0,
-      creditLimit: 0,
-      status: 'current',
       joinedAt: new Date().toLocaleDateString('en-GB', {
         day: 'numeric',
         month: 'short',
         year: 'numeric',
       }),
-      location: '',
-      transactions: [],
     };
     onAdd(newCustomer);
     setName('');
     setPhone('');
+    setCreditLimit('');
     setNotes('');
     setErrors({});
     setSubmitting(false);
@@ -77,6 +83,15 @@ export default function AddCustomerModal({ isOpen, onClose, onAdd }) {
           error={!!errors.phone}
           helperText={errors.phone}
           required
+        />
+        <Input
+          label="Credit limit (RWF, optional)"
+          placeholder="e.g. 100000"
+          value={creditLimit}
+          onChange={(event) => setCreditLimit(event.target.value)}
+          type="text"
+          error={!!errors.creditLimit}
+          helperText={errors.creditLimit}
         />
         <Input
           label="Notes (optional)"

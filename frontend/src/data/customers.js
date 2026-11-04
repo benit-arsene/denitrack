@@ -2,98 +2,210 @@ const formatRWF = (amount) => {
   return `RWF ${amount.toLocaleString('en-US', { minimumFractionDigits: 0 })}`;
 };
 
-const CUSTOMER_STATUSES = {
+export const CUSTOMER_STATUSES = {
   active: { label: 'Active', variant: 'success' },
   overdue: { label: 'Payment follow-up', variant: 'danger' },
   current: { label: 'Current', variant: 'neutral' },
 };
 
-const DEMO_CUSTOMERS = [
+// Determined customer status based on outstanding balance vs credit limit.
+export const computeStatus = (balance, creditLimit) => {
+  if (creditLimit > 0 && balance > creditLimit) {
+    return 'overdue';
+  }
+  if (balance > 0) {
+    return 'active';
+  }
+  return 'current';
+};
+
+export const INITIAL_CUSTOMERS = [
   {
     id: 'cust-001',
-    name: 'Jean d\'Amour Uwimana',
+    name: "Jean d'Amour Uwimana",
     phone: '+250 788 123 456',
-    outstandingBalance: 45000,
     creditLimit: 100000,
-    status: 'active',
+    notes: '',
     joinedAt: '15 Jan 2026',
-    location: 'Kigali',
-    transactions: [
-      { id: 'tx-101', date: '02 Nov 2026', type: 'Credit sale', amount: 25000, status: 'unpaid' },
-      { id: 'tx-102', date: '28 Oct 2026', type: 'Payment received', amount: 15000, status: 'paid' },
-      { id: 'tx-103', date: '14 Oct 2026', type: 'Credit sale', amount: 35000, status: 'unpaid' },
-    ],
   },
   {
     id: 'cust-002',
     name: 'Grace Mukantwari',
     phone: '+250 782 987 654',
-    outstandingBalance: 0,
     creditLimit: 75000,
-    status: 'current',
+    notes: 'Prefers mobile money payments.',
     joinedAt: '03 Mar 2026',
-    location: 'Nyamirambo',
-    transactions: [
-      { id: 'tx-201', date: '30 Oct 2026', type: 'Credit sale', amount: 18000, status: 'paid' },
-      { id: 'tx-202', date: '22 Oct 2026', type: 'Payment received', amount: 18000, status: 'paid' },
-    ],
   },
   {
     id: 'cust-003',
     name: 'Emmanuel Ndayisaba',
     phone: '+250 785 444 333',
-    outstandingBalance: 82000,
     creditLimit: 90000,
-    status: 'overdue',
+    notes: '',
     joinedAt: '12 Jan 2026',
-    location: 'Kimironko',
-    transactions: [
-      { id: 'tx-301', date: '01 Nov 2026', type: 'Credit sale', amount: 50000, status: 'unpaid' },
-      { id: 'tx-302', date: '18 Oct 2026', type: 'Credit sale', amount: 32000, status: 'unpaid' },
-      { id: 'tx-303', date: '05 Oct 2026', type: 'Payment received', amount: 20000, status: 'paid' },
-    ],
   },
   {
     id: 'cust-004',
     name: 'Aline Umuhoza',
     phone: '+250 781 222 111',
-    outstandingBalance: 12000,
     creditLimit: 50000,
-    status: 'active',
+    notes: '',
     joinedAt: '20 Feb 2026',
-    location: 'Gikondo',
-    transactions: [
-      { id: 'tx-401', date: '29 Oct 2026', type: 'Credit sale', amount: 12000, status: 'unpaid' },
-      { id: 'tx-402', date: '10 Oct 2026', type: 'Credit sale', amount: 20000, status: 'paid' },
-    ],
   },
   {
     id: 'cust-005',
     name: 'Samuel Ruzindana',
     phone: '+250 784 555 666',
-    outstandingBalance: 67000,
     creditLimit: 80000,
-    status: 'overdue',
+    notes: 'Reliable long-term customer.',
     joinedAt: '08 Jan 2026',
-    location: 'Remera',
-    transactions: [
-      { id: 'tx-501', date: '25 Oct 2026', type: 'Credit sale', amount: 40000, status: 'unpaid' },
-      { id: 'tx-502', date: '10 Oct 2026', type: 'Credit sale', amount: 27000, status: 'unpaid' },
-    ],
   },
   {
     id: 'cust-006',
     name: 'Chantal Nyirahabimana',
     phone: '+250 783 777 888',
-    outstandingBalance: 0,
     creditLimit: 60000,
-    status: 'current',
+    notes: '',
     joinedAt: '14 Apr 2026',
-    location: 'Kicukiro',
-    transactions: [
-      { id: 'tx-601', date: '26 Oct 2026', type: 'Credit sale', amount: 15000, status: 'paid' },
-    ],
   },
 ];
 
-export { DEMO_CUSTOMERS, CUSTOMER_STATUSES, formatRWF };
+export const INITIAL_TRANSACTIONS = [
+  {
+    id: 'tx-001',
+    customerId: 'cust-001',
+    type: 'debt',
+    amount: 25000,
+    description: 'Groceries on credit',
+    date: '02 Nov 2026',
+    status: 'completed',
+  },
+  {
+    id: 'tx-002',
+    customerId: 'cust-001',
+    type: 'payment',
+    amount: 15000,
+    description: 'Partial payment',
+    date: '28 Oct 2026',
+    status: 'completed',
+  },
+  {
+    id: 'tx-003',
+    customerId: 'cust-001',
+    type: 'debt',
+    amount: 35000,
+    description: 'Weekly stock',
+    date: '14 Oct 2026',
+    status: 'completed',
+  },
+  {
+    id: 'tx-004',
+    customerId: 'cust-002',
+    type: 'debt',
+    amount: 18000,
+    description: 'Household supplies',
+    date: '30 Oct 2026',
+    status: 'completed',
+  },
+  {
+    id: 'tx-005',
+    customerId: 'cust-002',
+    type: 'payment',
+    amount: 18000,
+    description: 'Full settlement',
+    date: '22 Oct 2026',
+    status: 'completed',
+  },
+  {
+    id: 'tx-006',
+    customerId: 'cust-003',
+    type: 'debt',
+    amount: 50000,
+    description: 'Bulk order',
+    date: '01 Nov 2026',
+    status: 'completed',
+  },
+  {
+    id: 'tx-007',
+    customerId: 'cust-003',
+    type: 'debt',
+    amount: 32000,
+    description: 'Restaurant supplies',
+    date: '18 Oct 2026',
+    status: 'completed',
+  },
+  {
+    id: 'tx-008',
+    customerId: 'cust-003',
+    type: 'payment',
+    amount: 20000,
+    description: 'Cash payment',
+    date: '05 Oct 2026',
+    status: 'completed',
+  },
+  {
+    id: 'tx-009',
+    customerId: 'cust-004',
+    type: 'debt',
+    amount: 12000,
+    description: 'Snacks and drinks',
+    date: '29 Oct 2026',
+    status: 'completed',
+  },
+  {
+    id: 'tx-010',
+    customerId: 'cust-004',
+    type: 'debt',
+    amount: 20000,
+    description: 'Cleaning items',
+    date: '10 Oct 2026',
+    status: 'completed',
+  },
+  {
+    id: 'tx-011',
+    customerId: 'cust-004',
+    type: 'payment',
+    amount: 20000,
+    description: 'Cash payment',
+    date: '10 Oct 2026',
+    status: 'completed',
+  },
+  {
+    id: 'tx-012',
+    customerId: 'cust-005',
+    type: 'debt',
+    amount: 40000,
+    description: 'Electronics',
+    date: '25 Oct 2026',
+    status: 'completed',
+  },
+  {
+    id: 'tx-013',
+    customerId: 'cust-005',
+    type: 'debt',
+    amount: 27000,
+    description: 'Kitchenware',
+    date: '10 Oct 2026',
+    status: 'completed',
+  },
+  {
+    id: 'tx-014',
+    customerId: 'cust-006',
+    type: 'debt',
+    amount: 15000,
+    description: 'Stationery',
+    date: '26 Oct 2026',
+    status: 'completed',
+  },
+  {
+    id: 'tx-015',
+    customerId: 'cust-006',
+    type: 'payment',
+    amount: 15000,
+    description: 'Cash payment',
+    date: '26 Oct 2026',
+    status: 'completed',
+  },
+];
+
+export { formatRWF };

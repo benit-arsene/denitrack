@@ -1,22 +1,16 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useCustomers } from '../hooks/useCustomers';
 import Button from '../components/ui/Button';
 import CustomerList from '../components/customers/CustomerList';
 import AddCustomerModal from '../components/customers/AddCustomerModal';
-import { DEMO_CUSTOMERS } from '../data/customers';
 import './../components/customers/customers.css';
 
 export default function Customers() {
-  const [customers, setCustomers] = useState([...DEMO_CUSTOMERS]);
+  const { customers, addCustomer } = useCustomers();
   const [addModalOpen, setAddModalOpen] = useState(false);
-  const navigate = useNavigate();
 
   const handleAddCustomer = (newCustomer) => {
-    setCustomers((prev) => [newCustomer, ...prev]);
-  };
-
-  const handleSelectCustomer = (id) => {
-    navigate(`/customers/${id}`);
+    addCustomer(newCustomer);
   };
 
   return (
@@ -34,7 +28,7 @@ export default function Customers() {
       </header>
 
       <div className="page-body dt-page-body">
-        <CustomerList customers={customers} onSelect={handleSelectCustomer} />
+        <CustomerList customers={customers} />
       </div>
 
       <AddCustomerModal

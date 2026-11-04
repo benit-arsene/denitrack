@@ -2,7 +2,7 @@ import { useState } from 'react';
 import SearchInput from '../ui/SearchInput';
 import CustomerRow from './CustomerRow';
 
-export default function CustomerList({ customers, onSelect }) {
+export default function CustomerList({ customers }) {
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredCustomers = customers.filter((customer) => {
@@ -36,7 +36,7 @@ export default function CustomerList({ customers, onSelect }) {
           ) : (
             filteredCustomers.map((customer) => (
               <li key={customer.id}>
-                <CustomerRow customer={customer} onSelect={onSelect} />
+                <CustomerRow customer={customer} />
               </li>
             ))
           )}

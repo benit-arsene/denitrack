@@ -1,0 +1,252 @@
+/* ===== Transaction management styles ===== */
+
+.dt-transactions-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dt-space-6);
+}
+
+.dt-page-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dt-space-4);
+  border-bottom: 1px solid var(--dt-border);
+  padding-bottom: var(--dt-space-4);
+  margin-bottom: var(--dt-space-6);
+}
+
+.dt-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--dt-space-4);
+  flex-wrap: wrap;
+}
+
+.dt-page-header h2 {
+  margin: 0;
+  font-size: var(--dt-font-size-2xl);
+  font-weight: var(--dt-font-weight-bold);
+  color: var(--dt-text);
+}
+
+.dt-action-buttons {
+  display: flex;
+  gap: var(--dt-space-3);
+  flex-shrink: 0;
+}
+
+.dt-page-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dt-space-6);
+}
+
+/* Filters */
+.dt-filters {
+  display: flex;
+  gap: var(--dt-space-4);
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: var(--dt-space-4);
+}
+
+.dt-search-wrapper {
+  flex: 1;
+  max-width: 420px;
+}
+
+.dt-search-field {
+  width: 100%;
+  min-height: 40px;
+  padding: var(--dt-space-3) var(--dt-space-4);
+  font-family: inherit;
+  font-size: var(--dt-font-size-sm);
+  color: var(--dt-text);
+  background: var(--dt-bg-secondary);
+  border: 1px solid var(--dt-border);
+  border-radius: var(--dt-radius);
+}
+
+.dt-search-field::placeholder {
+  color: var(--dt-text-muted);
+}
+
+.dt-search-field:focus {
+  outline: none;
+  border-color: var(--dt-accent);
+  box-shadow: 0 0 0 3px var(--dt-focus);
+}
+
+/* Transactions table */
+.dt-transactions-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--dt-font-size-sm);
+}
+
+.dt-transactions-table th {
+  text-align: left;
+  padding: var(--dt-space-3) var(--dt-space-4);
+  font-weight: var(--dt-font-weight-medium);
+  color: var(--dt-text-secondary);
+  border-bottom: 1px solid var(--dt-border);
+  font-size: var(--dt-font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.dt-transactions-table td {
+  padding: var(--dt-space-3) var(--dt-space-4);
+  border-bottom: 1px solid var(--dt-border);
+  color: var(--dt-text);
+}
+
+.dt-transactions-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.dt-transaction-row:hover {
+  background: var(--dt-hover);
+}
+
+.dt-align-right {
+  text-align: right;
+}
+
+.dt-tx-date {
+  color: var(--dt-text-muted);
+}
+
+.dt-tx-amount {
+  font-weight: var(--dt-font-weight-medium);
+  color: var(--dt-text);
+}
+
+.dt-tx-description {
+  color: var(--dt-text);
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.dt-tx-customer {
+  font-weight: var(--dt-font-weight-medium);
+  color: var(--dt-text);
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Record forms */
+.dt-record-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dt-space-4);
+}
+
+.dt-input-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dt-space-2);
+}
+
+.dt-input-label {
+  font-size: var(--dt-font-size-sm);
+  font-weight: var(--dt-font-weight-medium);
+  color: var(--dt-text);
+}
+
+.dt-balance-display {
+  font-size: var(--dt-font-size-sm);
+  color: var(--dt-text-secondary);
+  font-family: var(--dt-font-mono);
+}
+
+.dt-select {
+  min-height: 40px;
+  padding: var(--dt-space-3) var(--dt-space-4);
+  font-family: inherit;
+  font-size: var(--dt-font-size-sm);
+  color: var(--dt-text);
+  background: var(--dt-bg-secondary);
+  border: 1px solid var(--dt-border);
+  border-radius: var(--dt-radius);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.8' strokeLinecap='round' strokeLinejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--dt-space-3) center;
+  background-size: 16px;
+}
+
+.dt-select:focus {
+  outline: none;
+  border-color: var(--dt-accent);
+  box-shadow: 0 0 0 3px var(--dt-focus);
+}
+
+.dt-select option {
+  background: var(--dt-bg-secondary);
+  color: var(--dt-text);
+}
+
+/* Modal footer */
+.dt-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--dt-space-3);
+  padding: var(--dt-space-6);
+  border-top: 1px solid var(--dt-border);
+  background: var(--dt-bg-secondary);
+}
+
+/* Responsive */
+@media (max-width: 899px) {
+  .dt-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dt-search-wrapper {
+    max-width: 100%;
+  }
+
+  .dt-action-buttons {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .dt-action-buttons Button {
+    flex: 1;
+  }
+
+  .dt-transactions-table {
+    font-size: var(--dt-font-size-xs);
+  }
+
+  .dt-transactions-table th,
+  .dt-transactions-table td {
+    padding: var(--dt-space-2) var(--dt-space-3);
+  }
+}
+
+@media (max-width: 640px) {
+  .dt-header-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--dt-space-3);
+  }
+
+  .dt-action-buttons {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .dt-action-buttons Button {
+    width: 100%;
+  }
+}

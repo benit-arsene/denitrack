@@ -1,25 +1,32 @@
+import { useNavigate } from 'react-router-dom';
+import { useCustomers } from '../../hooks/useCustomers';
 import Badge from '../ui/Badge';
 import './customers.css';
 
-const STATUS_INFO = {
-  active: { label: 'Active', variant: 'success' },
-  overdue: { label: 'Payment follow-up', variant: 'danger' },
-  current: { label: 'Current', variant: 'neutral' },
-};
+export default function CustomerRow({ customer }) {
+  const navigate = useNavigate();
+  const { getCustomerBalance, CUSTOMER_STATUSES, computeStatus, formatCurrency } =
+    useCustomers();
 
-export default function CustomerRow({ customer, onSelect }) {
-  const statusInfo = STATUS_INFO[customer.status] || STATUS_INFO.current;
+  const balance = getCustomerBalance(customer.id);
+  const creditLimit = customer.creditLimit || 0;
+  const status = computeStatus(balance, creditLimit);
+  const statusInfo = CUSTOMER_STATUSES[status] || CUSTOMER_STATUSES.current;
+
+  const handleSelect = () => {
+    navigate(`/customers/${customer.id}`);
+  };
 
   return (
     <article
       className="dt-customer-row"
-      onClick={() => onSelect(customer.id)}
+      onClick={handleSelect}
       role="button"
       tabIndex={0}
       onKeyDown={(event) => {
         if (event.key === 'Enter' || event.key === ' ') {
           event.preventDefault();
-          onSelect(customer.id);
+          handleSelect();
         }
       }}
     >
@@ -30,8 +37,6 @@ export default function CustomerRow({ customer, onSelect }) {
         <h3 className="dt-customer-name">{customer.name}</h3>
         <div className="dt-customer-meta">
           <span className="dt-customer-phone" aria-label="Phone">{customer.phone}</span>
-          <span className="dt-customer-divider">·</span>
-          <span className="dt-customer-joined">Joined {customer.joinedAt}</span>
         </div>
       </div>
       <div className="dt-customer-status">
@@ -41,7 +46,7 @@ export default function CustomerRow({ customer, onSelect }) {
       </div>
       <div className="dt-customer-balance">
         <span className="dt-balance-label">Outstanding</span>
-        <span className="dt-balance-amount">{`RWF ${customer.outstandingBalance.toLocaleString('en-US')}`}</span>
+        <span className="dt-balance-amount">{formatCurrency(balance)}</span>
       </div>
       <button className="dt-customer-select" aria-label={`View profile for ${customer.name}`} title="View profile">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

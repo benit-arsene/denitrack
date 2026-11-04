@@ -1,12 +1,21 @@
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useCustomers } from '../hooks/useCustomers';
 import Badge from '../components/ui/Badge';
-import { DEMO_CUSTOMERS, CUSTOMER_STATUSES, formatRWF } from '../data/customers';
 import './../components/customers/customers.css';
 
 export default function CustomerDetail() {
   const { id } = useParams();
-  const customer = DEMO_CUSTOMERS.find((c) => c.id === id);
+  const {
+    getCustomer,
+    getCustomerTransactions,
+    getCustomerBalance,
+    CUSTOMER_STATUSES,
+    computeStatus,
+    formatCurrency,
+  } = useCustomers();
+
+  const customer = getCustomer(id);
 
   if (!customer) {
     return (
@@ -21,7 +30,11 @@ export default function CustomerDetail() {
     );
   }
 
-  const statusInfo = CUSTOMER_STATUSES[customer.status] || CUSTOMER_STATUSES.current;
+  const customerTransactions = getCustomerTransactions(customer.id);
+  const balance = getCustomerBalance(customer.id);
+  const creditLimit = customer.creditLimit || 0;
+  const status = computeStatus(balance, creditLimit);
+  const statusInfo = CUSTOMER_STATUSES[status] || CUSTOMER_STATUSES.current;
 
   return (
     <div className="page dt-customer-detail-page">
@@ -36,7 +49,7 @@ export default function CustomerDetail() {
               Back to customers
             </Link>
             <h1>{customer.name}</h1>
-            <p className="page-description">{customer.location}</p>
+            <p className="page-description">{customer.notes || 'No additional notes.'}</p>
           </div>
         </div>
       </header>
@@ -52,7 +65,7 @@ export default function CustomerDetail() {
               <div className="dt-detail-field">
                 <span className="dt-detail-label">Credit limit</span>
                 <span className="dt-detail-value">
-                  {customer.creditLimit > 0 ? formatRWF(customer.creditLimit) : 'Not set'}
+                  {creditLimit > 0 ? formatCurrency(creditLimit) : 'Not set'}
                 </span>
               </div>
               <div className="dt-detail-field">
@@ -60,9 +73,9 @@ export default function CustomerDetail() {
                 <span className="dt-detail-value">{customer.joinedAt}</span>
               </div>
               <div className="dt-detail-field">
-                <span className="dt-detail-label">Location</span>
+                <span className="dt-detail-label">Notes</span>
                 <span className="dt-detail-value">
-                  {customer.location || 'Not specified'}
+                  {customer.notes || 'Not specified'}
                 </span>
               </div>
             </div>
@@ -71,7 +84,7 @@ export default function CustomerDetail() {
           <div className="dt-detail-summary">
             <div className="dt-summary-card">
               <div className="dt-summary-label">Outstanding balance</div>
-              <div className="dt-summary-amount">{formatRWF(customer.outstandingBalance)}</div>
+              <div className="dt-summary-amount">{formatCurrency(balance)}</div>
               <Badge variant={statusInfo.variant} className="dt-status-badge">
                 {statusInfo.label}
               </Badge>
@@ -82,10 +95,12 @@ export default function CustomerDetail() {
         <section className="dt-transactions-section">
           <div className="dt-section-header">
             <h2 className="dt-section-title">Transaction history</h2>
-            <p className="dt-section-subtitle">All credit sales and payments for {customer.name}.</p>
+            <p className="dt-section-subtitle">
+              All credit sales and payments for {customer.name}.
+            </p>
           </div>
 
-          {customer.transactions.length === 0 ? (
+          {customerTransactions.length === 0 ? (
             <div className="dt-empty-transactions">
               <p>No transactions recorded yet.</p>
             </div>
@@ -95,29 +110,32 @@ export default function CustomerDetail() {
                 <tr>
                   <th scope="col">Date</th>
                   <th scope="col">Type</th>
+                  <th scope="col">Description</th>
                   <th scope="col" className="dt-align-right">Amount</th>
                   <th scope="col">Status</th>
                 </tr>
               </thead>
               <tbody>
-                {customer.transactions.map((tx) => (
-                  <tr key={tx.id} className="dt-transaction-row">
-                    <td className="dt-tx-date">{tx.date}</td>
-                    <td>
-                      <Badge variant={tx.type === 'Credit sale' ? 'info' : 'success'}>
-                        {tx.type}
-                      </Badge>
-                    </td>
-                    <td className="dt-align-right dt-tx-amount">
-                      {tx.type === 'Credit sale' ? '-' : '+'} {formatRWF(tx.amount)}
-                    </td>
-                    <td>
-                      <Badge variant={tx.status === 'paid' ? 'success' : 'danger'}>
-                        {tx.status}
-                      </Badge>
-                    </td>
-                  </tr>
-                ))}
+                {customerTransactions.map((tx) => {
+                  const typeVariant = tx.type === 'debt' ? 'danger' : 'success';
+                  return (
+                    <tr key={tx.id} className="dt-transaction-row">
+                      <td className="dt-tx-date">{tx.date}</td>
+                      <td>
+                        <Badge variant={typeVariant}>
+                          {tx.type.charAt(0).toUpperCase() + tx.type.slice(1)}
+                        </Badge>
+                      </td>
+                      <td className="dt-tx-description">{tx.description || '—'}</td>
+                      <td className="dt-align-right dt-tx-amount">
+                        {tx.type === 'debt' ? '-' : '+'} {formatCurrency(tx.amount)}
+                      </td>
+                      <td>
+                        <Badge variant="neutral">{tx.status}</Badge>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           )}
