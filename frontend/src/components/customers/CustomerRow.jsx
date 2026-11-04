@@ -30,23 +30,25 @@ export default function CustomerRow({ customer }) {
         }
       }}
     >
-      <div className="dt-customer-avatar" aria-hidden="true">
-        {customer.name.charAt(0)}
-      </div>
-      <div className="dt-customer-info">
-        <h3 className="dt-customer-name">{customer.name}</h3>
-        <div className="dt-customer-meta">
-          <span className="dt-customer-phone" aria-label="Phone">{customer.phone}</span>
+      <div className="dt-customer-top">
+        <div className="dt-customer-avatar" aria-hidden="true">
+          {customer.name.charAt(0)}
+        </div>
+        <div className="dt-customer-info">
+          <h3 className="dt-customer-name">{customer.name}</h3>
+          <div className="dt-customer-meta">
+            <span className="dt-customer-phone" aria-label="Phone">{customer.phone}</span>
+          </div>
         </div>
       </div>
-      <div className="dt-customer-status">
+      <div className="dt-customer-footer">
         <Badge variant={statusInfo.variant} className="dt-customer-status-badge">
           {statusInfo.label}
         </Badge>
-      </div>
-      <div className="dt-customer-balance">
-        <span className="dt-balance-label">Outstanding</span>
-        <span className="dt-balance-amount">{formatCurrency(balance)}</span>
+        <div className="dt-customer-balance">
+          <span className="dt-balance-label">Outstanding</span>
+          <span className="dt-balance-amount">{formatCurrency(balance)}</span>
+        </div>
       </div>
       <button className="dt-customer-select" aria-label={`View profile for ${customer.name}`} title="View profile">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

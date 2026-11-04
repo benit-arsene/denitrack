@@ -101,41 +101,44 @@ export default function Transactions() {
             }
           />
         ) : (
-          <table className="dt-transactions-table">
-            <thead>
-              <tr>
-                <th scope="col">Customer</th>
-                <th scope="col">Type</th>
-                <th scope="col">Description</th>
-                <th scope="col" className="dt-align-right">Amount</th>
-                <th scope="col">Date</th>
-                <th scope="col">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredTransactions.map((tx) => {
-                const customer = customerMap[tx.customerId];
-                const typeVariant = TYPE_VARIANTS[tx.type] || 'neutral';
-                return (
-                  <tr key={tx.id} className="dt-transaction-row">
-                    <td className="dt-tx-customer">{customer ? customer.name : 'Unknown'}</td>
-                    <td>
-                      <Badge variant={typeVariant}>{TYPE_LABELS[tx.type]}</Badge>
-                    </td>
-                    <td className="dt-tx-description">{tx.description || '—'}</td>
-                    <td className="dt-align-right dt-tx-amount">
-                      {tx.type === 'debt' ? '-' : '+'} {formatCurrency(tx.amount)}
-                    </td>
-                    <td className="dt-tx-date">{tx.date}</td>
-                    <td>
-                      <Badge variant="neutral">{tx.status}</Badge>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+          <div className="dt-table-wrapper">
+            <table className="dt-transactions-table">
+              <thead>
+                <tr>
+                  <th scope="col">Customer</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Description</th>
+                  <th scope="col" className="dt-align-right">Amount</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredTransactions.map((tx) => {
+                  const customer = customerMap[tx.customerId];
+                  const typeVariant = TYPE_VARIANTS[tx.type] || 'neutral';
+                  return (
+                    <tr key={tx.id} className="dt-transaction-row">
+                      <td className="dt-tx-customer">{customer ? customer.name : 'Unknown'}</td>
+                      <td>
+                        <Badge variant={typeVariant}>{TYPE_LABELS[tx.type]}</Badge>
+                      </td>
+                      <td className="dt-tx-description">{tx.description || '—'}</td>
+                      <td className="dt-align-right dt-tx-amount">
+                        {tx.type === 'debt' ? '-' : '+'} {formatCurrency(tx.amount)}
+                      </td>
+                      <td className="dt-tx-date">{tx.date}</td>
+                      <td>
+                        <Badge variant="neutral">{tx.status}</Badge>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         )}
+
       </div>
 
       <RecordDebtModal

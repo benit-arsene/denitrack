@@ -89,6 +89,12 @@
   min-height: 72px;
 }
 
+/* Wrapper divs are transparent to flex on desktop so the original horizontal layout is unchanged */
+.dt-customer-top,
+.dt-customer-footer {
+  display: contents;
+}
+
 .dt-customer-row:hover {
   background: var(--dt-bg-secondary);
   border-color: var(--dt-border-hover);
@@ -401,22 +407,61 @@
   .dt-customer-row {
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--dt-space-3);
+    justify-content: space-between;
+    gap: var(--dt-space-4);
     padding: var(--dt-space-4);
+    min-height: auto;
+  }
+
+  .dt-customer-top,
+  .dt-customer-footer {
+    display: flex;
+    width: 100%;
+  }
+
+  .dt-customer-top {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--dt-space-3);
+  }
+
+  .dt-customer-name {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+  }
+
+  .dt-customer-footer {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--dt-space-3);
+    border-top: 1px solid var(--dt-border);
   }
 
   .dt-customer-balance {
-    text-align: left;
-    align-self: flex-end;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    gap: var(--dt-space-1);
   }
 
-  .dt-customer-select {
-    align-self: flex-start;
-    margin-top: var(--dt-space-2);
+  .dt-balance-label {
+    font-size: var(--dt-font-size-xs);
+    color: var(--dt-text-secondary);
   }
 
   .dt-balance-amount {
+    font-size: var(--dt-font-size-sm);
+    font-weight: var(--dt-font-weight-bold);
+    color: var(--dt-text);
     white-space: nowrap;
+  }
+
+  .dt-customer-select {
+    align-self: flex-end;
+    margin-top: 0;
   }
 
   .dt-transactions-table {
